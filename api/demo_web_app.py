@@ -101,11 +101,11 @@ def demo_web_app(gpt, config=UIConfig()):
     def translate():
         # pylint: disable=unused-variable
         prompt = request.json["prompt"]
-        response = gpt.submit_request(prompt)
+        response = gpt.get_top_reply(prompt)
         offset = 0
-        if not gpt.append_output_prefix_to_query:
-            offset = len(gpt.output_prefix)
-        return {'text': response['choices'][0]['text'][offset:]}
+        # if not gpt.append_output_prefix_to_query:
+        #     offset = len(gpt.output_prefix)
+        return {'text': response}
 
     subprocess.Popen(["yarn", "start"])
     app.run()
